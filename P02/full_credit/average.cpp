@@ -1,3 +1,4 @@
+//Ryan Laurents - 09/16/2019 - HW 02: Averages
 #include <iostream>
 #include "average.h"
 
