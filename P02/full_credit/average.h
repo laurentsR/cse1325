@@ -1,3 +1,4 @@
+//Ryan Laurents - 09/16/2019 - HW 02: Averages
 #ifndef AVERAGE_H
 #define AVERAGE_H
 #include <iostream>
