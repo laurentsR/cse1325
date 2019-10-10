@@ -41,24 +41,24 @@ void Mainwin::on_spinbutton_value_changed() {
     
 void Mainwin::on_button_click(int button) {
 	int sp = spinbutton->get_value();
-	int answer;
+	float answer;
     if(button == 1)
     {
     	answer = sqrt(sp);
-    	Gtk::MessageDialog{*this, answer}.run();
+    	Gtk::MessageDialog{*this, std::to_string(answer)}.run();
     }
     else if(button == 2)
     {
     	answer = log(sp);
+    	Gtk::MessageDialog{*this, std::to_string(answer)}.run();
     }
     else if(button == 3)
     {
     	answer = cos(sp);
+    	Gtk::MessageDialog{*this, std::to_string(answer)}.run();
     }
     else
     {
-    	Gtk::MessageDialog{*this, "Unknown error. Congratulations!"};
-        dialog.run();
+    	Gtk::MessageDialog{*this, "Unknown error. Congratulations!"}.run();     
     }
-}
 }
