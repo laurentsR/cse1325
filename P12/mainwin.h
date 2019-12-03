@@ -29,7 +29,7 @@ class Mainwin : public Gtk::Window {
         void on_open_click();
         void on_new_click();
         void on_about_click();
-
+		void on_properties_click();
 
         void status(std::string s);        // Set the status message
     private:

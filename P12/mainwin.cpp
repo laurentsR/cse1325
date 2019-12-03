@@ -57,6 +57,12 @@ Mainwin::Mainwin() : shelter{new Shelter{"Pawsome Pals"}} {
     menuitem_open->signal_activate().connect([this] {this->on_open_click();});
     filemenu->append(*menuitem_open);
     
+    //    	P R O P E R T I E S
+    //Append properties to file
+    Gtk::MenuItem *menuitem_properties = Gtk::manage(new Gtk::MenuItem("_Properties", true));
+    menuitem_properties->signal_activate().connect([this] {this->on_properties_click();});
+    filemenu->append(*menuitem_properties);
+    
     // 		A B O U T
     //Append about to File
     Gtk::MenuItem *menuitem_about = Gtk::manage(new Gtk::MenuItem("_About", true));
@@ -430,6 +436,50 @@ void Mainwin::on_about_click() {
 
     Gtk::MessageDialog dlg(*this, s, true);
     dlg.run();
+}
+
+void Mainwin::on_properties_click()
+{
+	Gtk::Dialog dialog{"Properties", *this};
+	dialog.set_default_size(240, 110);
+	Gtk::Grid grid;
+	
+	Gtk::Label lname{"Shelter Name: "};
+	Gtk::Label rname{shelter->name()};
+	grid.attach(lname, 0, 0, 1, 1);
+	grid.attach(rname, 1, 0, 2, 1);
+	
+	std::string clients = std::to_string(shelter->num_clients());
+	Gtk::Label lclients{"Client Count: "};
+	Gtk::Label rclients{clients};
+	grid.attach(lclients, 0, 1, 1, 1);
+	grid.attach(rclients, 1, 1, 2, 1);
+	
+	std::string animals = std::to_string(shelter->num_animals());
+	Gtk::Label lanimals{"Animals Count: "};
+	Gtk::Label ranimals{animals};
+	grid.attach(lanimals, 0, 2, 1, 1);
+	grid.attach(ranimals, 1, 2, 2, 1);
+	
+	int num_adopted = 0;
+	for(int i=0; i<shelter->num_clients(); ++i)
+    	if(shelter->client(i).num_adopted() > 0)
+    		{
+    			for(int j = 0; j < shelter->client(i).num_adopted(); ++j)
+    				num_adopted++;
+    		}
+   	std::string adopted = std::to_string(num_adopted);
+    		
+	Gtk::Label ladopted{"Adopted Count: "};
+	Gtk::Label radopted{adopted};
+	grid.attach(ladopted, 0, 3, 1, 1);
+	grid.attach(radopted, 1, 3, 2, 1);
+	
+	dialog.add_button("Close", 0);
+	
+	dialog.get_content_area()->add(grid);
+	dialog.show_all();
+	dialog.run();
 }
 
 //  N E W  D O G
